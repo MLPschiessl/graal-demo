@@ -1,0 +1,15 @@
+## --- Preparation: Start database --- ##
+docker start graal-postgres
+
+## --- Preparation: Set Graal JDK if not already done --- ##
+export JAVA_HOME=[GRAAL_JDK_DIRECTORY]
+export PATH=[GRAAL_JDK_DIRECTORY]/bin:$PATH
+
+## --- Execution: Start Spring Boot with profile --- ##
+java -jar spring-boot.jar --spring.profiles.active=local-other-2
+
+## --- Execution: Start GraalVM Native Image with profile --- ##
+./graal-demo --spring.profiles.active=local-other-2
+
+## --- Execution: Start native-tests --- ##
+./native-tests
