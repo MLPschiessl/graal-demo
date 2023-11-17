@@ -1,0 +1,19 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="DiaryEntryControllerTest (AOT)" type="JUnit" factoryName="JUnit">
+    <module name="graal-demo" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="web.controller.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <option name="PACKAGE_NAME" value="web.controller" />
+    <option name="MAIN_CLASS_NAME" value="web.controller.DiaryEntryControllerTest" />
+    <option name="METHOD_NAME" value="" />
+    <option name="TEST_OBJECT" value="class" />
+    <option name="VM_PARAMETERS" value="-ea -Dspring.aot.enabled=true" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

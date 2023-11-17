@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: graal-demo-postgres
+  labels:
+    app.kubernetes.io/name: graal-demo-postgres
+    app.kubernetes.io/instance: graal-demo-postgres
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: graal-demo-postgres
+      app.kubernetes.io/instance: graal-demo-postgres
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: graal-demo-postgres
+        app.kubernetes.io/instance: graal-demo-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15.4
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+          ports:
+            - containerPort: 5432
+              name: postgres

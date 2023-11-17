@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "graal-demo.fullname" . }}
+  labels:
+    {{- include "graal-demo.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "graal-demo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        co.elastic.logs/enabled: "true"
+        co.elastic.logs/raw: >-
+          [{
+            "type": "container",
+            "paths": [ "/var/log/containers/*-${data.kubernetes.container.id}.log" ],
+            "json": {
+                "message_key": "message",
+                "keys_under_root": true,
+                "overwrite_keys": false,
+                "add_error_key": true
+            }
+          }]
+        co.elastic.metrics/module: prometheus
+        co.elastic.metrics/hosts: '${data.host}:8080'
+        co.elastic.metrics/metrics_path: /graal-demo/actuator/prometheus
+        co.elastic.metrics/period: 1m
+      {{- end }}
+      labels:
+        {{- include "graal-demo.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "graal-demo.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /graal-demo/actuator/health/liveness
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /graal-demo/actuator/health/readiness
+              port: http
+          env:
+            - name: POSTGRES_SCHEMA
+              value: public
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_SECRET
+              value: postgres
+            - name: POSTGRES_URL
+              value: jdbc:postgresql://graal-demo-postgres:5432/postgres
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

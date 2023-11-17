@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: graal-demo-postgres
+  labels:
+    app.kubernetes.io/name: graal-demo-postgres
+    app.kubernetes.io/instance: graal-demo-postgres
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: postgres
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: graal-demo-postgres
+    app.kubernetes.io/instance: graal-demo-postgres

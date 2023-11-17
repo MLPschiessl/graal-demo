@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Application (AOT)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <option name="ACTIVE_PROFILES" value="local" />
+    <module name="graal-demo" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="web.Application" />
+    <option name="VM_PARAMETERS" value="-Dspring.aot.enabled=true" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

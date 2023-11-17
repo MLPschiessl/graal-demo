@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "261cfcf3-5d72-40ab-bbfb-32950f23d2db",
+		"name": "Graal Demo Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29378748"
+	},
+	"item": [
+		{
+			"name": "Load Author",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/author/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"author",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load Authors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/authors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"authors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save Author",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":null,\"name\":\"Author 1\",\"diary\":{\"id\":null,\"entries\":[{\"id\":null,\"dateToDescribe\":\"2023-01-01\",\"content\":\"Der Start ins neue Jahr war super!\"},{\"id\":null,\"dateToDescribe\":\"2023-01-31\",\"content\":\"Heute war ein besonders schöner Tag!\"}]}}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/author",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load example entry (from resource)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/example-entry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"example-entry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load all diary entries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/entries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"entries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Load all entries for diary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/diary/1/entries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"diary",
+						"1",
+						"entries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update diary entry",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":1,\"dateToDescribe\":\"2023-01-01\",\"content\":\"Der Start ins neue Jahr war wirklich echt super!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/diary/1/entry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"diary",
+						"1",
+						"entry"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Save diary entry",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"id\":null,\"dateToDescribe\":\"2023-01-02\",\"content\":\"Gestern war echt ein super Tag! Das freut mich heute immer noch!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/graal-demo/diary/1/entry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"graal-demo",
+						"diary",
+						"1",
+						"entry"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
